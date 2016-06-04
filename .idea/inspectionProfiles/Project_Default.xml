@@ -1,0 +1,17 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="LoggerInitializedWithForeignClass" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="loggerClassName" value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger" />
+      <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger" />
+    </inspection_tool>
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <replaceConfiguration name="clear_padding_replace" text="&lt;$tag$ $attribute$=&quot;$value$&quot;/&gt;" recursive="false" caseInsensitive="false" type="XML" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="">
+        <constraint name="tag" within="" contains="" />
+        <constraint name="attribute" regexp=".*padding.*" maxCount="2147483647" target="true" within="" contains="" />
+        <constraint name="value" maxCount="2147483647" within="" contains="" />
+        <constraint name="__context__" within="" contains="" />
+      </replaceConfiguration>
+    </inspection_tool>
+  </profile>
+</component>
