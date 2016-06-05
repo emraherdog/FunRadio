@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="radio_urls">
+        <item>http://rmc.scdn.arkena.com/rmc.mp3</item>
+        <item>http://streaming.radio.rtl.fr/rtl-1-44-128</item>
+        <item>http://e1-live-mp3-128.scdn.arkena.com/europe1.mp3</item>
+        <item>http://audio.scdn.arkena.com/11008/franceinter-midfi128.mp3</item>
+        <item>http://audio.scdn.arkena.com/11006/franceinfo-midfi128.mp3</item>
+        <item>http://ice1.infomaniak.ch/radiomeuh-128.mp3</item>
+        <item>http://audio.scdn.arkena.com/11016/fip-midfi128.mp3</item>
+        <item>http://streaming.radio.funradio.fr/fun-1-44-128</item>
+        <item>http://adwzg3.scdn.arkena.com/8473/nrj_178499.mp3</item>
+        <item>http://bfmbusiness.scdn.arkena.com/bfmbusiness.mp3</item>
+        <item>http://mp3lg4.tdf-cdn.com/9243/lag_164753.mp3</item>
+        <item>http://rfm-live-mp3-128.scdn.arkena.com/rfm.mp3</item>
+        <item>http://adwzg3.scdn.arkena.com/8470/nrj_165631.mp3</item>
+        <item>http://icecast.skyrock.net/s/natio_mp3_128k</item>
+        <item>http://stream1.chantefrance.com/Chante_France</item>
+        <item>http://ouifm.ice.infomaniak.ch/ouifm-high.mp3</item>
+        <item>http://audio.scdn.arkena.com/11385/fbnord-midfi128.mp3</item>
+        <item>http://95.81.147.24/8474/nrj_177978.mp3</item>
+        <item>http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-eieuk</item>
+        <item>http://edge.espn.cdn.abacast.net/espn-networkmp3-48?</item>
+        <item>http://nprdmp-live01-mp3.akacast.akamaistream.net/7/998/364916/v1/npr.akacast.akamaistream.net/nprdmp_live01_mp3</item>
+
+
+    </string-array>
+
+    <integer-array name="radio_image_id">
+
+        <item>@mipmap/rmc_info_talk_sport</item>
+        <item>@mipmap/rtl</item>
+        <item>@mipmap/europe1</item>
+        <item>@mipmap/france_inter</item>
+        <item>@mipmap/france_info</item>
+        <item>@mipmap/radiomeuh</item>
+        <item>@mipmap/fip</item>
+        <item>@mipmap/fun_radio_fr</item>
+        <item>@mipmap/cherie_fm</item>
+        <item>@mipmap/bfm</item>
+        <item>@mipmap/virgin_radio_officiel</item>
+        <item>@mipmap/rfm_1039_fm</item>
+        <item>@mipmap/nrj_france</item>
+        <item>@mipmap/skyrock</item>
+        <item>@mipmap/chantefrance</item>
+        <item>@mipmap/ouifm</item>
+        <item>@mipmap/france_bleu_nord</item>
+        <item>@mipmap/bel_rtl</item>
+        <item>@mipmap/bbc_radio_4</item>
+        <item>@mipmap/bbc_world_service</item>
+        <item>@mipmap/espn_radio</item>
+        <item>@mipmap/npr_news</item>
+
+
+
+    </integer-array>
+
+</resources>

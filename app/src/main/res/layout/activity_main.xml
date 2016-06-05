@@ -7,48 +7,11 @@
     android:background="@android:color/black"
     tools:context="com.ufxmeng.je.funradio.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_main"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/row_item"/>
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:alpha="0.9"
-        android:background="@android:color/white">
-
-
-        <TextView
-            android:id="@+id/textview_paly_time"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="00:00"
-            android:textSize="16sp"/>
-
-
-        <ImageView
-            android:id="@+id/imageview_profile"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/france_info"/>
-
-
-        <ImageView
-            android:id="@+id/imageview_volume"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/ic_volume"/>
-
-    </RelativeLayout>
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>
