@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class RadioFragment extends Fragment {
     boolean isSilent = false;
 
     RelativeLayout mRelativeLayout;
+    private ProgressBar mProgressBar = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +84,7 @@ public class RadioFragment extends Fragment {
 
         mAdapter = new RadioAdapter(getActivity(), getData());
 
+
         mAdapter.setOnItemClickListener(new RadioAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -98,9 +101,16 @@ public class RadioFragment extends Fragment {
                     intent.setAction(RadioState.ACTION_STOP);
                     mActivity.startService(intent);
 
+
                 } else {
 
                     currentState = RadioState.STATE_PLAY;
+                    //hide last progress bar
+                    View childView = mRecyclerView.getChildAt(currentPosition);
+                    mProgressBar = (ProgressBar) childView.findViewById(R.id.progressbar_item);
+                    mProgressBar.setVisibility(View.GONE);
+                    mTextViewPlayTime.setText("00:00");
+
                     currentPosition = position;
 
                     final RadioInfo radioInfo = mRadioInfos.get(position);
@@ -111,6 +121,10 @@ public class RadioFragment extends Fragment {
                     intent.putExtra("url", mRadioUrls[position]);
                     mActivity.startService(intent);
 
+                    //display progress bar
+                    childView = mRecyclerView.getChildAt(position);
+                    mProgressBar = (ProgressBar) childView.findViewById(R.id.progressbar_item);
+                    mProgressBar.setVisibility(View.VISIBLE);
 
                 }
 
@@ -226,9 +240,15 @@ public class RadioFragment extends Fragment {
             }
             switch (intent.getAction()) {
                 case RadioState.ACTION_BROADCAST_PREPARED:
+                    if (mProgressBar != null) {
+                        mProgressBar.setVisibility(View.GONE);
+                    }
                     Logger.d("ACTION_BROADCAST_PREPARED");
                     break;
                 case RadioState.ACTION_BROADCAST_PAUSE:
+                    if (mProgressBar != null) {
+                        mProgressBar.setVisibility(View.GONE);
+                    }
                     Logger.d("ACTION_BROADCAST_PAUSE");
                     break;
                 case RadioState.ACTION_BROADCAST_ERROR:
@@ -238,12 +258,21 @@ public class RadioFragment extends Fragment {
                 case RadioState.ACTION_BROADCAST_PLAYTIME:
                     updatePlayTime(intent);
                     break;
+                case RadioState.ACTION_BROADCAST_CACHE:
+                    if (mProgressBar != null) {
+                        mProgressBar.setVisibility(View.VISIBLE);
+                    }
+                    break;
             }
         }
     };
 
     private void updatePlayTime(Intent intent) {
         if (intent != null) {
+
+            if (mProgressBar != null && mProgressBar.getVisibility() == View.VISIBLE) {
+                mProgressBar.setVisibility(View.GONE);
+            }
             final int playTime = intent.getIntExtra("play_time", 0);
             mTextViewPlayTime.setText(millToString(playTime));
         }
@@ -271,6 +300,7 @@ public class RadioFragment extends Fragment {
         intentFilter.addAction(RadioState.ACTION_BROADCAST_ERROR);
         intentFilter.addAction(RadioState.ACTION_BROADCAST_PAUSE);
         intentFilter.addAction(RadioState.ACTION_BROADCAST_PLAYTIME);
+        intentFilter.addAction(RadioState.ACTION_BROADCAST_CACHE);
         LocalBroadcastManager.getInstance(getActivity().getApplicationContext())
                 .registerReceiver(mReceiver, intentFilter);
     }

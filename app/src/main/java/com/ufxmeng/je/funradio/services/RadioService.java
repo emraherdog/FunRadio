@@ -91,9 +91,7 @@ public class RadioService extends Service
             e.printStackTrace();
         }
 
-
         Logger.d("ACTION_PLAY %s", url);
-
     }
 
     @Override
@@ -118,9 +116,11 @@ public class RadioService extends Service
 
     @Override
     public void onPrepared(MediaPlayer mp) {
+
         mp.start();
         mp.setVolume(1.0f, 1.0f);
         mHandler.sendEmptyMessage(100);
+
         Intent intent = new Intent(RadioState.ACTION_BROADCAST_PREPARED);
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
         Toast.makeText(RadioService.this, "Start playing!", Toast.LENGTH_SHORT).show();
@@ -128,18 +128,22 @@ public class RadioService extends Service
     }
 
 
-    private void sendBroadcastPlayTime() {
-        Intent intent = new Intent(RadioState.ACTION_BROADCAST_PLAYTIME);
+    private void sendBroadcastPlayTime(String action) {
+        Intent intent = new Intent(action);
         intent.putExtra("play_time", mMediaPlayer.getCurrentPosition());
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
     }
 
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            sendBroadcastPlayTime();
             if (mMediaPlayer.isPlaying()) {
+                sendBroadcastPlayTime(RadioState.ACTION_BROADCAST_PLAYTIME);
                 sendEmptyMessageDelayed(240, 500);
+            } else if (currentState == RadioState.STATE_PLAY &&
+                    !mMediaPlayer.isPlaying()) {
+                sendBroadcastPlayTime(RadioState.ACTION_BROADCAST_CACHE);
             }
         }
     };

@@ -24,7 +24,16 @@
         <item>http://edge.espn.cdn.abacast.net/espn-networkmp3-48?</item>
         <item>http://nprdmp-live01-mp3.akacast.akamaistream.net/7/998/364916/v1/npr.akacast.akamaistream.net/nprdmp_live01_mp3</item>
 
+    </string-array>
 
+    <string-array name="podcast_urls">
+        <item>http://www.rtl.fr/podcast/l-heure-du-crime.xml</item>
+        <item>http://www.rtl.fr/podcast/rtl-matin.xml</item>
+        <item>http://www.rtl.fr/podcast/rtl-midi.xml</item>
+        <item>http://www.rtl.fr/podcast/rtl-soir.xml</item>
+        <item>http://www.rtl.fr/podcast/le-grand-jury.xml</item>
+        <item>http://www.rtl.fr/podcast/linvite-de-rtl.xml</item>
+        <item>http://www.rtl.fr/podcast/le-journal-rtl.xml</item>
     </string-array>
 
     <integer-array name="radio_image_id">
@@ -51,7 +60,6 @@
         <item>@mipmap/bbc_world_service</item>
         <item>@mipmap/espn_radio</item>
         <item>@mipmap/npr_news</item>
-
 
 
     </integer-array>
