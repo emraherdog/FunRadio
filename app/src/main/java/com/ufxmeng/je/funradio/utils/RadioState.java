@@ -12,4 +12,6 @@ public class RadioState {
 
     public static final String ACTION_BROADCAST_PREPARED = "com.ufxmeng.je.funradio.ACTION_BROADCAST_PREPARED";
     public static final String ACTION_BROADCAST_ERROR = "com.ufxmeng.je.funradio.ACTION_BROADCAST_ERROR";
+    public static final String ACTION_BROADCAST_PAUSE = "com.ufxmeng.je.funradio.ACTION_BROADCAST_PAUSE";
+    public static final String ACTION_BROADCAST_PLAYTIME = "com.ufxmeng.je.funradio.ACTION_BROADCAST_PLAYTIME";
 }

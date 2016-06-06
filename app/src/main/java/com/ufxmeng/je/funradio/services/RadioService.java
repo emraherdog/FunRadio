@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.PowerManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
@@ -48,10 +50,15 @@ public class RadioService extends Service
         return super.onStartCommand(intent, flags, startId);
     }
 
+
     private void radioStop(Intent intent) {
         if (currentState == RadioState.STATE_PLAY) {
             currentState = RadioState.STATE_STOP;
             mMediaPlayer.pause();
+
+            intent = new Intent();
+            intent.setAction(RadioState.ACTION_BROADCAST_PAUSE);
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
             Logger.d("ACTION_STOP");
         }
     }
@@ -113,21 +120,38 @@ public class RadioService extends Service
     public void onPrepared(MediaPlayer mp) {
         mp.start();
         mp.setVolume(1.0f, 1.0f);
-
+        mHandler.sendEmptyMessage(100);
         Intent intent = new Intent(RadioState.ACTION_BROADCAST_PREPARED);
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
         Toast.makeText(RadioService.this, "Start playing!", Toast.LENGTH_SHORT).show();
         Logger.d("onPrepared");
     }
 
+
+    private void sendBroadcastPlayTime() {
+        Intent intent = new Intent(RadioState.ACTION_BROADCAST_PLAYTIME);
+        intent.putExtra("play_time", mMediaPlayer.getCurrentPosition());
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            sendBroadcastPlayTime();
+            if (mMediaPlayer.isPlaying()) {
+                sendEmptyMessageDelayed(240, 500);
+            }
+        }
+    };
+
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
 
-        stopSelf();
         Intent intent = new Intent(RadioState.ACTION_BROADCAST_ERROR);
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
         Toast.makeText(getApplicationContext(), "Failed to Load Stream.", Toast.LENGTH_SHORT).show();
         Logger.d("what %d, extra %d", what, extra);
+        stopSelf();
         return true;
     }
 

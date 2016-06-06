@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -52,6 +53,9 @@ public class RadioFragment extends Fragment {
     private String[] mRadioUrls;
     private PrefUtils mPrefUtils;
 
+    AudioManager mAudioManager;
+    boolean isSilent = false;
+
     RelativeLayout mRelativeLayout;
 
     @Override
@@ -61,6 +65,8 @@ public class RadioFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_radio, container, false);
 
         mActivity = getActivity();
+
+        mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         mPrefUtils = PrefUtils.getInstance(mActivity);
 
@@ -169,8 +175,23 @@ public class RadioFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ///// TODO: 6/4/2016 add listener
+
+                if (isSilent) {
+                    mImageViewVolume.setImageResource(R.mipmap.ic_volume);
+                    final int maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                    mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume, AudioManager.FLAG_PLAY_SOUND);
+                    isSilent = false;
+                } else {
+                    mImageViewVolume.setImageResource(R.mipmap.ic_mute);
+                    mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, AudioManager.FLAG_PLAY_SOUND);
+                    isSilent = true;
+
+                }
             }
         });
+
+
+        //add animation to mImageViewProfile
 
     }
 
@@ -207,12 +228,39 @@ public class RadioFragment extends Fragment {
                 case RadioState.ACTION_BROADCAST_PREPARED:
                     Logger.d("ACTION_BROADCAST_PREPARED");
                     break;
+                case RadioState.ACTION_BROADCAST_PAUSE:
+                    Logger.d("ACTION_BROADCAST_PAUSE");
+                    break;
                 case RadioState.ACTION_BROADCAST_ERROR:
+                    stopTextPlayTime();
                     Logger.d("ACTION_BROADCAST_ERROR");
+                    break;
+                case RadioState.ACTION_BROADCAST_PLAYTIME:
+                    updatePlayTime(intent);
                     break;
             }
         }
     };
+
+    private void updatePlayTime(Intent intent) {
+        if (intent != null) {
+            final int playTime = intent.getIntExtra("play_time", 0);
+            mTextViewPlayTime.setText(millToString(playTime));
+        }
+
+    }
+
+    private String millToString(int time) {
+
+        return (time / 1000 / 60 >= 10 ? time / 1000 / 60 : "0" + time / 1000 / 60)
+                + ":" +
+                (time / 1000 % 60 >= 10 ? time / 1000 % 60 : "0" + time / 1000 % 60);
+    }
+
+    private void stopTextPlayTime() {
+        mTextViewPlayTime.setText("00:00");
+    }
+
 
     @Override
     public void onResume() {
@@ -221,6 +269,8 @@ public class RadioFragment extends Fragment {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(RadioState.ACTION_BROADCAST_PREPARED);
         intentFilter.addAction(RadioState.ACTION_BROADCAST_ERROR);
+        intentFilter.addAction(RadioState.ACTION_BROADCAST_PAUSE);
+        intentFilter.addAction(RadioState.ACTION_BROADCAST_PLAYTIME);
         LocalBroadcastManager.getInstance(getActivity().getApplicationContext())
                 .registerReceiver(mReceiver, intentFilter);
     }
