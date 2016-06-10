@@ -2,6 +2,7 @@ package com.ufxmeng.je.funradio;
 
 import android.app.Application;
 
+import com.android.volley.toolbox.Volley;
 import com.ufxmeng.je.funradio.utils.NetworkUtils;
 
 /**
@@ -12,7 +13,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         final NetworkUtils networkUtils = NetworkUtils.getInstance(getApplicationContext());
         final boolean inConnected = networkUtils.inConnected();
+
+
     }
 }

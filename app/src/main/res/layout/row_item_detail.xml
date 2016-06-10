@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageview_item_podcast_detail"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp"
+        android:src="@mipmap/podcast_rtl_matin"/>
+
+    <TextView
+        android:id="@+id/textview_title_podcast_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/imageview_item_podcast_detail"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Ce rendez-vous incontournable des personnalités politiques est présenté par Olivier Mazerolle"/>
+
+    <TextView
+        android:id="@+id/textview_pubdate_podcast_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageview_item_podcast_detail"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@id/imageview_item_podcast_detail"
+        android:text="Fri, 03 Jun 2016"/>
+
+    <TextView
+        android:id="@+id/textview_duration_podcast_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageview_item_podcast_detail"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="20dp"
+        android:text="00:08:26"/>
+
+</RelativeLayout>

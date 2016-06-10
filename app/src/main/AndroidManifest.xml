@@ -36,6 +36,9 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name=".activity.PodcastDetailActivity">
+        </activity>
     </application>
 
 </manifest>
