@@ -11,7 +11,7 @@ simple cilent for french radio stream
 ## Screen Capture:
 <p align="center">
   <img src="http://i.imgur.com/rO01YQa.jpg" width="200" height="320" />
-  <img src="http://imgur.com/0bB6Iw8.jpg" width="200" height="320" />
+  <img src="http://imgur.com/la2CL5J.jpg" width="200" height="320" />
  </p>
  
   
