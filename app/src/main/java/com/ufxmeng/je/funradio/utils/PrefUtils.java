@@ -13,6 +13,7 @@ public class PrefUtils {
 
     public static final String PREF_FUN_RADIO = "com.ufxmeng.je.funradio";
     public static final String PREF_KEY_CONNECTED = "pref_key_connected";
+    public static final String PREF_KEY_CURRENTSTATION = "pref_key_current_station";
     private final SharedPreferences mPreferences;
     private final SharedPreferences.Editor mEditor;
 
@@ -40,5 +41,12 @@ public class PrefUtils {
         mEditor.apply();
     }
 
+    public int getCurrentstation() {
+        return mPreferences.getInt(PREF_KEY_CURRENTSTATION, 4);
+    }
 
+    public void setCurrentstation(int position) {
+        mEditor.putInt(PREF_KEY_CURRENTSTATION, position);
+        mEditor.apply();
+    }
 }

@@ -25,7 +25,7 @@
         <service
             android:name=".services.RadioService"
             android:enabled="true"
-            android:exported="false">
+            android:exported="true">
         </service>
 
         <receiver
@@ -35,6 +35,21 @@
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
+        </receiver>
+
+        <receiver android:name=".reciver.RadioAppWidgetProvider">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="funradio.intent.action.NEXT_STATION"/>
+                <action android:name="funradio.intent.action.PREV_STATION"/>
+                <action android:name="funradio.intent.action.PLAY_STATION"/>
+                <action android:name="com.ufxmeng.je.funradio.ACTION_BROADCAST_PREPARED"/>
+                <action android:name="com.ufxmeng.je.funradio.ACTION_BROADCAST_ERROR"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/radio_widgetinfo"/>
         </receiver>
 
         <activity android:name=".activity.PodcastDetailActivity">
