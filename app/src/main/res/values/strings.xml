@@ -3,6 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="empty_view_text">This is the empty view</string>
 
 </resources>
